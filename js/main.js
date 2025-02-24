@@ -1,3 +1,4 @@
+// Selektovanje elemenata
 const taskList = document.getElementById("taskList");
 const newTaskInput = document.getElementById("newTaskInput");
 const addTaskBtn = document.getElementById("addTask");
