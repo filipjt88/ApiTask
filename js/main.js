@@ -11,3 +11,23 @@ function loadTasks() {
             tasks.forEach(task => addTaskToDOM(task));
         }).catch(error => console.error("Doslo je do greske pri dodavanju novog podatka", error));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
