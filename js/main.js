@@ -12,6 +12,32 @@ function loadTasks() {
         }).catch(error => console.error("Doslo je do greske pri dodavanju novog podatka", error));
 }
 
+function addTaskToDOM(task) {
+    const li = document.createElement("li");
+    li.textContent = task.title;
+    if (task.completed) {
+        li.style.textDecoration = "line-though";
+    }
+    taskList.appendChild(li);
+}
+
+addTaskBtn.addEventListener("click", () => {
+    const newTask = {
+        title: newTaskInput.value,
+        completed: false
+    };
+    fetch("https://jsonplaceholder.typicode.com/todos", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newTask)
+    }).then(response => response.json())
+        .then(data => {
+            addTaskToDOM(data);
+            newTaskInput.value = "";
+        }).catch(error => console.error("Doslo je do greske pri dodavanju zadatka", error));
+});
+
+loadTasks();
 
 
 
