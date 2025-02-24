@@ -14,6 +14,22 @@ function loadTasks() {
 
 function addTaskToDOM(task) {
     const li = document.createElement("li");
+    // Create checkbox
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
+    checkbox.addEventListener("change", () => {
+        task.completed = checkbox.checked;
+        taskText.style.textDecoration = task.completed ? "line-though" : "none";
+    });
+
+    // Text task
+    const taskText = document.createElement("span");
+    taskText.textContent = task.title;
+    taskText.style.marginLeft = "8px";
+    if (task.completed) {
+        taskText.style.textDecoration = 'line-though';
+    }
     li.textContent = task.title;
     if (task.completed) {
         li.style.textDecoration = "line-though";
