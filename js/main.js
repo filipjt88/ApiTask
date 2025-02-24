@@ -34,7 +34,21 @@ function addTaskToDOM(task) {
     if (task.completed) {
         li.style.textDecoration = "line-though";
     }
+
+    // Delete task
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.style.marginLeft = "10px";
+    deleteBtn.onclick = () => {
+        li.remove();
+        console.log(`Task is ${task.title} removed`);
+
+    }
+
     taskList.appendChild(li);
+    li.appendChild(checkbox);
+    li.appendChild(taskText);
+    li.appendChild(deleteBtn);
 }
 
 addTaskBtn.addEventListener("click", () => {
