@@ -9,7 +9,7 @@ function loadTasks() {
         .then(tasks => {
             taskList.innerHTML = "";
             tasks.forEach(task => addTaskToDOM(task));
-        }).catch(error => console.error("Doslo je do greske pri dodavanju novog podatka", error));
+        }).catch(error => console.error("Error adding new task", error));
 }
 
 function addTaskToDOM(task) {
@@ -37,18 +37,31 @@ function addTaskToDOM(task) {
 
     // Delete task
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "X";
+    deleteBtn.textContent = "🗑";
     deleteBtn.style.marginLeft = "10px";
     deleteBtn.onclick = () => {
         li.remove();
         console.log(`Task is ${task.title} removed`);
-
     }
+
+    // Edit task
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "✏️";
+    editBtn.style.marginLeft = "5px";
+    editBtn.onclick = () => {
+        const newTitle = prompt("Edit task:", taskText.textContent);
+        if (newTitle) {
+            taskText.textContent = newTitle;
+            console.log(`Task changed to ${newTitle}`);
+        }
+    };
 
     taskList.appendChild(li);
     li.appendChild(checkbox);
     li.appendChild(taskText);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
+    taskList.appendChild(li);
 }
 
 addTaskBtn.addEventListener("click", () => {
@@ -64,7 +77,7 @@ addTaskBtn.addEventListener("click", () => {
         .then(data => {
             addTaskToDOM(data);
             newTaskInput.value = "";
-        }).catch(error => console.error("Doslo je do greske pri dodavanju zadatka", error));
+        }).catch(error => console.error("Error adding new task", error));
 });
 
 loadTasks();
